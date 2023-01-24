@@ -1,19 +1,53 @@
 <?php
-
+/**
+ * Class to handle secret creation and display.
+ *
+ * @author      Lee Garner <lee@leegarner.com>
+ * @copyright   Copyright (c) 2022 Lee Garner <lee@leegarner.com>
+ * @package     keyshare
+ * @version     v0.0.1
+ * @license     http://opensource.org/licenses/gpl-2.0.php
+ *              GNU Public License v2 or later
+ * @filesource
+ */
 namespace KeyShare\Models;
 use glFusion\Database\Database;
 use glFusion\Log\Log;
 use KeyShare\Config;
 
 
+/**
+ * Class for secret creation and display.
+ * @package keyshare
+ */
 class Secret
 {
+    /** Database record ID.
+     * @var integer */
     private $id = 0;
+
+    /** Timestamp when secret is created.
+     * @var integer */
     private $ts = 0;
+
+    /** Public encryption key.
+     * @var string */
     private $pub_key = '';
+
+    /** Secret value, unencrypted.
+     * @var string */
     private $value = '';
+
+    /** Private encryption key. Not stored anywhere.
+     * @var string */
     private $_prv_key = '';
+
+    /** Secret value, encrypted.
+     * @var string */
     private $_enc_value = '';
+
+    /** Errors accumulated during secret creation.
+     * @var array */
     private $_errors = array();
 
 
@@ -353,6 +387,8 @@ class Secret
 
     /**
      * Get any errors that occurred.
+     * Returns either a formatted un-numbered list, or a raw array of strings
+     * depending on the parameter value.
      *
      * @param   boolean $format     True for a formatted list, False for an array
      * @return  string|array    Formatted list or array

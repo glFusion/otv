@@ -17,8 +17,8 @@ Use the glFusion automated installation.
 1. Copy the displayed URL and send it via some method (more secure the better).
 ### Viewing a Secret
 1. Visit the provided URL.
-1. Click the "Display Secret" link when it is safe to do so.
 1. Copy the secret data for later use.
+1. Click the "Display Secret" link (when it is safe to do so) to display the secret.
 
 ## Notes
 * Secrets are encrypted by a combination of public and private keys.
@@ -31,8 +31,8 @@ Use the glFusion automated installation.
 * Hide from Plugin menu: Select whether the plugin should be included in the "Extras" menu.
 * Expire secrets after X days: Enter a number of days after which un-viewed secrets will be deleted.
   Enter "0" to disable purging.
-* Delete after Viewing: Normally set to "Yes" to delete secrets immediately after the view
-  is created. This can be set to "No" temporarily to assist debugging.
+* Delete after Viewing: Normally set to "Yes" to delete a secret immediately after displaying it.
+  This can be set to "No" temporarily to assist debugging.
 
 ## Access Control
 Access is controlled via glFusion "features". Assign the appropriate feature to one or
