@@ -1,0 +1,18 @@
+{# begin {templatelocation} #}
+<h1>Secret Value</h1>
+<h2>
+	{$LANG_KEYSHARE['hlp_postsubmit1']}<br />
+    <a class="cpybtn" title="{$LANG_KEYSHARE['copy_clipboard']}" data-clipboard-text="{url}">
+        <i class="uk-icon-clipboard uk-icon-hover"></i>
+    </a>
+	<br />{url}
+</h2>
+<script src="{site_url}/javascript/addons/clipboard/clipboard.min.js"></script>
+<script>
+var clipboard = new Clipboard('.cpybtn');
+clipboard.on('success', function(e) {
+    e.clearSelection();
+    KeyShare.notify('{$LANG_KEYSHARE['copy_success']}', 'success');
+});
+</script>
+{# end {templatelocation} #}

@@ -1,0 +1,31 @@
+{# begin {templatelocation} #}
+	<a data-uk-toggle="{target:'.toggle_secret'}">
+		<div class="uk-alert">
+			<div class="uk-margin-right tooltip" title="Click to view" style="display:inline;">
+				<span class="toggle_secret uk-hidden">
+					<i class="uk-icon uk-icon-chevron-right"></i>&nbsp;{$LANG_KEYSHARE['hide_secret']}
+				</span>
+				<span class="toggle_secret">
+					<i class="uk-icon uk-icon-chevron-down"></i>&nbsp;{$LANG_KEYSHARE['display_secret']}
+				</span>
+			</div>
+		</div>
+	</a>
+	<div class="toggle_secret uk-hidden">
+		<pre>{secret}</pre>
+	</div>
+<h2>
+	{$LANG_KEYSHARE['hlp_display1']}
+    <a class="cpybtn" title="{$LANG_KEYSHARE['copy_clipboard']}" data-clipboard-text="{secret}">
+        <i class="uk-icon-clipboard uk-icon-hover"></i>
+    </a>
+</h2>
+<script src="{site_url}/javascript/addons/clipboard/clipboard.min.js"></script>
+<script>
+var clipboard = new Clipboard('.cpybtn');
+clipboard.on('success', function(e) {
+    e.clearSelection();
+    KeyShare.notify('{$LANG_KEYSHARE['copy_success']}', 'success');
+});
+</script>
+{# end {templatelocation} #}

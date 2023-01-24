@@ -1,0 +1,19 @@
+{# begin {templatelocation} #}
+<h2>{$LANG_KEYSHARE['hlp_submit1']}<br />{$LANG_KEYSHARE['hlp_submit2']}</h2>
+<form class="uk-form uk-form-horizontal" method="post" action="{site_url}/keyshare/index.php">
+	<fieldset>
+		<div class="uk-form-row">
+			<textarea required class="uk-width-1-1" rows="5" name="secret"></textarea>
+		</div>
+	</fieldset>
+
+	<div class="uk-form-row" style="margin-top:10px">
+		<label class="uk-form-label">&nbsp;</label>
+		<div class="uk-form-controls">
+			<button class="uk-button uk-button-success" name="submitval" type="submit" value="{$LANG_ADMIN['submit']}"/>{$LANG_ADMIN['submit']}</button>
+			<button class="uk-button uk-button-primary" name="reset" type="reset" value="{$LANG_QUIZ['reset']}">{$LANG_QUIZ['reset']}</button>
+		</div>
+	</div>
+{spamx}
+</form>
+{# end {templatelocation} #}
