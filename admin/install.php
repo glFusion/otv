@@ -18,13 +18,7 @@ USES_lib_install();
 if (!SEC_inGroup('Root')) {
     // Someone is trying to illegally access this page
     COM_accessLog("Someone has tried to illegally access the KeyShare install/uninstall page.  User id: {$_USER['uid']}, Username: {$_USER['username']}, IP: $REMOTE_ADDR");
-    $display = COM_siteHeader ('menu', $LANG_ACCESS['accessdenied'])
-             . COM_startBlock ($LANG_ACCESS['accessdenied'])
-             . $LANG_ACCESS['plugin_access_denied_msg']
-             . COM_endBlock ()
-             . COM_siteFooter ();
-    echo $display;
-    exit;
+    COM_404();
 }
 
 /**

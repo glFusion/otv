@@ -24,6 +24,9 @@ $page = '';
 $title = 'Secure Sharing';
 
 if (isset($_POST['submitval'])) {
+    if (!SEC_hasRights('keyshare.submit')) {
+        COM_404();
+    }
     if (PLG_checkforSpam($_POST['secret'], $_CONF['spamx'], $_POST)) {
         COM_displayMessageAndAbort ($result, 'spamx', 403, 'Forbidden');
     }
@@ -46,6 +49,9 @@ if (isset($_POST['submitval'])) {
         echo COM_refresh(Config::get('url') . '/index.php');
     }
 } elseif (isset($_GET['k'])) {
+    if (!SEC_hasRights('keyshare.view')) {
+        COM_404();
+    }
     $S = Secret::getFromUrlKey($_GET['k']);
     if ($S && $S->getId() > 0) {
         $page .= $S->render();
@@ -53,6 +59,9 @@ if (isset($_POST['submitval'])) {
         $page .= $LANG_KEYSHARE['record_not_found'];
     }
 } else {
+    if (!SEC_hasRights('keyshare.submit')) {
+        COM_404();
+    }
     $page .= Secret::submit();
 }
 
