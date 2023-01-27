@@ -24,9 +24,11 @@ $page = '';
 $title = 'Secure Sharing';
 
 if (isset($_POST['submitval'])) {
+    // Submitting a new secret
     if (!SEC_hasRights('keyshare.submit')) {
         COM_404();
     }
+    // Try to keep this from becoming a spam vector.
     if (PLG_checkforSpam($_POST['secret'], $_CONF['spamx'], $_POST)) {
         COM_displayMessageAndAbort ($result, 'spamx', 403, 'Forbidden');
     }
@@ -49,6 +51,7 @@ if (isset($_POST['submitval'])) {
         echo COM_refresh(Config::get('url') . '/index.php');
     }
 } elseif (isset($_GET['k'])) {
+    // Decoding a secret value.
     if (!SEC_hasRights('keyshare.view')) {
         COM_404();
     }
@@ -59,6 +62,7 @@ if (isset($_POST['submitval'])) {
         $page .= $LANG_KEYSHARE['record_not_found'];
     }
 } else {
+    // Display the submission form.
     if (!SEC_hasRights('keyshare.submit')) {
         COM_404();
     }

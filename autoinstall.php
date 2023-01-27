@@ -54,7 +54,7 @@ $INSTALL_plugin[Config::PI_NAME] = array(
     ),
     array(
         'type' => 'feature',
-        'feature' => Config::PI_NAME . '.create',
+        'feature' => Config::PI_NAME . '.submit',
         'desc' => 'Access to create values for ' . $ucPI_NAME,
         'variable' => 'create_feature_id',
     ),
