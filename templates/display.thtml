@@ -1,4 +1,10 @@
 {# begin {templatelocation} #}
+<h2>
+	{$LANG_KEYSHARE['hlp_display1']}
+    <a class="cpybtn" title="{$LANG_KEYSHARE['copy_clipboard']}" data-clipboard-text="{secret}">
+        <i class="uk-icon-clipboard uk-icon-hover"></i>
+    </a>
+</h2>
 	<a data-uk-toggle="{target:'.toggle_secret'}">
 		<div class="uk-alert">
 			<div class="uk-margin-right tooltip" title="Click to view" style="display:inline;">
@@ -14,12 +20,6 @@
 	<div class="toggle_secret uk-hidden">
 		<pre>{secret}</pre>
 	</div>
-<h2>
-	{$LANG_KEYSHARE['hlp_display1']}
-    <a class="cpybtn" title="{$LANG_KEYSHARE['copy_clipboard']}" data-clipboard-text="{secret}">
-        <i class="uk-icon-clipboard uk-icon-hover"></i>
-    </a>
-</h2>
 <script src="{site_url}/javascript/addons/clipboard/clipboard.min.js"></script>
 <script>
 var clipboard = new Clipboard('.cpybtn');
