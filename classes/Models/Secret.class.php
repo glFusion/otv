@@ -56,34 +56,8 @@ class Secret
      */
     public function __construct(?int $id=NULL, ?string $prv_key=NULL)
     {
-        global $_TABLES;
-
-        if ($prv_key) {
-            $this->_prv_key = $prv_key;
-        }
-
         if ($id > 0) {
-            try {
-                $row = Database::getInstance()->conn->executeQuery(
-                    "SELECT * FROM {$_TABLES['keyshare_secrets']} WHERE id = ?",
-                    array($id),
-                    array(Database::INTEGER)
-                )->fetchAssociative();
-            } catch (\Throwable $e) {
-                Log::write('system', Log::ERROR, __METHOD__ . ': ' . $e->getMessage());
-                $row = false;
-            }
-            if (is_array($row)) {
-                $this->id = (int)$row['id'];
-                $this->ts = (int)$row['ts'];
-                $this->pub_key = $row['pub_key'];
-                $this->_enc_value = $row['value'];
-                if (!empty($this->_prv_key)) {
-                    // If a private key is set, decrypt the secret.
-                    // Otherwise assume it will be set and decrypted later.
-                    $this->value = $this->decrypt();
-                }
-            }
+            $this->retrieve($id, $prv_key);
         }
     }
 
@@ -161,6 +135,19 @@ class Secret
 
 
     /**
+     * Set the private key value. May also be done in the constructor.
+     *
+     * @param   string  $key    Private key
+     * @return  object  $this
+     */
+    public function withPrvKey(string $key) : self
+    {
+        $this->_prv_key = $key;
+        return $this;
+    }
+
+
+    /**
      * Set the public key value.
      *
      * @param   string  $key    Public key
@@ -208,7 +195,7 @@ class Secret
      */
     public function save(?string $value=NULL) : bool
     {
-        global $_TABLES, $LANG_KEYSHARE;
+        global $_TABLES, $LANG_KEYSHARE, $_USER, $_SERVER;
 
         $this->_prv_key = Token::create();
         $this->pub_key = Token::create();
@@ -237,6 +224,11 @@ class Secret
                 )
             );
             $this->id = $db->conn->lastInsertId();
+            Log::write(
+                'keyshare',
+                Log::INFO,
+                sprintf($LANG_KEYSHARE['secret_created'], $_USER['uid'], $_SERVER['REAL_ADDR'])
+            );
         } catch (\Throwable $e) {
             Log::write('system', Log::ERROR, __METHOD__ . ': ' . $e->getMessage());
             $this->_errors[] = $LANG_KEYSHARE['op_failure'];
@@ -364,6 +356,52 @@ class Secret
         PLG_templateSetVars('keyshare', $T);
         $T->parse('output', 'form');
         return $T->finish($T->get_var('output'));
+    }
+
+
+    /**
+     * Retrieve and decrypt a secret.
+     *
+     * @param   integer $id     Record ID
+     * @return  void
+     */
+    public function retrieve(int $id, ?string $prv_key=NULL) : void
+    {
+        global $_TABLES, $_USER, $_SERVER, $LANG_KEYSHARE;
+
+        // Set the private key if not done somewhere else.
+        if ($prv_key) {
+            $this->_prv_key = $prv_key;
+        }
+
+        if ($id > 0 && !empty($this->_prv_key)) {
+            try {
+                $row = Database::getInstance()->conn->executeQuery(
+                    "SELECT * FROM {$_TABLES['keyshare_secrets']} WHERE id = ?",
+                    array($id),
+                    array(Database::INTEGER)
+                )->fetchAssociative();
+            } catch (\Throwable $e) {
+                Log::write('system', Log::ERROR, __METHOD__ . ': ' . $e->getMessage());
+                $row = false;
+            }
+            if (is_array($row)) {
+                $this->id = (int)$row['id'];
+                $this->ts = (int)$row['ts'];
+                $this->pub_key = $row['pub_key'];
+                $this->_enc_value = $row['value'];
+                if (!empty($this->_prv_key)) {
+                    // If a private key is set, decrypt the secret.
+                    // Otherwise assume it will be set and decrypted later.
+                    $this->value = $this->decrypt();
+                }
+                Log::write(
+                    'keyshare',
+                    Log::INFO,
+                    sprintf($LANG_KEYSHARE['secret_read'], $_USER['uid'], $_SERVER['REAL_ADDR'])
+                );
+            }
+        }
     }
 
 

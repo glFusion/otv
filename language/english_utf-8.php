@@ -36,6 +36,8 @@ $LANG_KEYSHARE = array(
     'record_not_found' => 'The requested record was not found.',
     'display_secret' => 'Display Secret',
     'hide_secret' => 'Hide Secret',
+    'secret_created' => 'Secret created by user %d from %s',
+    'secret_read' => 'Secret read by user %d from %s',
 );
 
 // Localization of the Admin Configuration UI

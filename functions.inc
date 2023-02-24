@@ -44,6 +44,15 @@ spl_autoload_register(function ($class)
     }
 });
 use KeyShare\Config;
+use glFusion\Log\Log;
+Log::config('keyshare',
+    array(
+      'type'  => 'file',
+      'path'  => $_CONF['path_log'],
+      'file'  => 'keyshare.log',
+      'level' => Log::INFO,
+    )
+);
 
 // Load the site's language file, falling back to English.
 $langpath = __DIR__ . '/language';
