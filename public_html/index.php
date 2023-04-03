@@ -59,7 +59,7 @@ if (isset($_POST['submitval'])) {
     if ($S && $S->getId() > 0) {
         $page .= $S->render();
     } else {
-        $page .= $LANG_KEYSHARE['record_not_found'];
+        $page .= COM_showMessageText($LANG_KEYSHARE['record_not_found'], '', true, 'error');
     }
 } else {
     // Display the submission form.
