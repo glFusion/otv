@@ -5,10 +5,10 @@
  * definitions, or are items that don't lend themselves well to the
  * glFusion configuration system, such as allowed file types.
  *
- * @copyright   Copyright (c) 2022 The following authors:
+ * @copyright   Copyright (c) 2023 The following authors:
  * @author      Lee Garner <lee@leegarner.com>
  * @package     keyshare
- * @version     v0.0.1
+ * @version     v0.1.0
  * @license     http://opensource.org/licenses/gpl-2.0.php
  *              GNU Public License v2 or later
  * @filesource
@@ -19,7 +19,7 @@ if (!defined ('GVERSION')) {
 }
 
 use KeyShare\Config;
-Config::set('pi_version', '0.0.1');
+Config::set('pi_version', '0.1.0');
 Config::set('gl_version', '2.0.0');
 
 // Add to $_TABLES array the tables your plugin uses
