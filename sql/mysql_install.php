@@ -16,8 +16,6 @@ if (!defined ('GVERSION')) {
 }
 global $_SQL, $KEYSHARE_UPGRADE;
 
-use KeyShare\DB;
-
 $_SQL = array();
 $_SQL['keyshare_secrets'] = "CREATE TABLE {$_TABLES['keyshare_secrets']} (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
