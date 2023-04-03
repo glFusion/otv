@@ -72,9 +72,9 @@ $INSTALL_plugin[Config::PI_NAME] = array(
     ),
     array(
         'type' => 'mapping',
-        'findgroup' => 'All Users',
+        'findgroup' => 'Logged-In Users',
         'feature' => 'create_feature_id',
-        'log' => 'Adding create feature to all users',
+        'log' => 'Adding create feature to logged-in users',
     ),
     array(
         'type' => 'mapping',
