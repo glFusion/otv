@@ -181,7 +181,7 @@ function plugin_geticon_keyshare()
 function plugin_upgrade_keyshare()
 {
     require_once __DIR__ . '/upgrade.php';
-    return KEYSHARE_upgrade();
+    return KEYSHARE_do_upgrade();
 }
 
 
@@ -227,25 +227,37 @@ function plugin_getheaderjs_keyshare()
 
 
 /**
- * Return the items that should be removed with the plugin.
+ * Automatic uninstall function for plugins.
  *
- * @return  array   Array of items to be removed.
+ * @return   array
+ *
+ * This code is automatically uninstalling the plugin.
+ * It passes an array to the core code function that removes
+ * tables, groups, features and php blocks from the tables.
+ * Additionally, this code can perform special actions that cannot be
+ * foreseen by the core code (interactions with other plugins for example)
  */
 function plugin_autouninstall_keyshare()
 {
     $out = array (
-        // Give the name of the tables, without $_TABLES[]
+        /* give the name of the tables, without $_TABLES[] */
         'tables' => array(
-            'keyshare_secrets',
+            Config::PI_NAME . '_secrets',
         ),
-        // Give the full name of the feature, as in the db
+        /* give the full name of the group, as in the db */
+        'groups' => array(
+        ),
+        /* give the full name of the feature, as in the db */
         'features' => array(
-            'keyshare.admin',
-            'keyshare.submit',
+            Config::PI_NAME . '.admin',
+            Config::PI_NAME . '.submit',
+            Config::PI_NAME . '.view',
         ),
-        'vars' => array(),
-        'groups' => array(),
-        'php_blocks' => array(),
+        /* give the full name of the block, including 'phpblock_', etc */
+        'php_blocks' => array(
+        ),
+        /* give all vars with their name */
+        'vars'=> array()
     );
     return $out;
 }
