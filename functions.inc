@@ -224,3 +224,28 @@ function plugin_getheaderjs_keyshare()
     );
     return $files;
 }
+
+
+/**
+ * Return the items that should be removed with the plugin.
+ *
+ * @return  array   Array of items to be removed.
+ */
+function plugin_autouninstall_keyshare()
+{
+    $out = array (
+        // Give the name of the tables, without $_TABLES[]
+        'tables' => array(
+            'keyshare_secrets',
+        ),
+        // Give the full name of the feature, as in the db
+        'features' => array(
+            'keyshare.admin',
+            'keyshare.submit',
+        ),
+        'vars' => array(),
+        'groups' => array(),
+        'php_blocks' => array(),
+    );
+    return $out;
+}
