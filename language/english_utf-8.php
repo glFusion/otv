@@ -38,6 +38,7 @@ $LANG_KEYSHARE = array(
     'hide_secret' => 'Hide Secret',
     'secret_created' => 'Secret created by user %d from %s',
     'secret_read' => 'Secret read by user %d from %s',
+    'create_another' => 'Create Another',
 );
 
 // Localization of the Admin Configuration UI

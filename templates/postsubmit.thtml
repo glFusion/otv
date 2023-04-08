@@ -7,6 +7,7 @@
     </a>
 	<br />{url}
 </h2>
+<a class="uk-button uk-button-primary" href="{pi_url}/index.php">{$LANG_KEYSHARE['create_another']}</a>
 <script src="{site_url}/javascript/addons/clipboard/clipboard.min.js"></script>
 <script>
 var clipboard = new Clipboard('.cpybtn');

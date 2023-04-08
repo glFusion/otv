@@ -39,8 +39,11 @@ if (isset($_POST['submitval'])) {
         $url = Config::get('url') . '/index.php?k=' . urlencode($url_key);
         $T = new Template(Config::get('template_path'));
         $T->set_file('display', 'postsubmit.thtml');
-        $T->set_var('urlkey', $url_key);
-        $T->set_var('url', $url);
+        $T->set_var(array(
+            'urlkey' => $url_key,
+            'url' => $url,
+            'pi_url' => Config::get('url'),
+        ) );
         $T->parse('output', 'display');
         $page .= $T->finish($T->get_var('output'));
     } else {
@@ -70,7 +73,7 @@ if (isset($_POST['submitval'])) {
 }
 
 $display = COM_siteHeader($title);
-$display .= KeyShare\Menu::User();
+//$display .= KeyShare\Menu::User();
 $display .= $page;
 $display .= COM_siteFooter();
 echo $display;
